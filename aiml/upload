@@ -1,12 +1,12 @@
 #!/bin/bash
-s3Dir="s3DirName"
-for instanceId in "instanceId1" "instanceId2"
+s3Dir=""
+for instanceId in ""
 do
 	for metric in "NetworkPacketsIn" "NetworkPacketsOut" "CPUUtilization" "NetworkIn" "NetworkOut" "DiskReadBytes" "DiskWriteBytes" "DiskReadOps" "DiskWriteOps" "CPUCreditUsage" "CPUCreditBalance" "CPUSurplusCreditBalance" "CPUSurplusCreditCharged" "StatusCheckFailed_System" "StatusCheckFailed_Instance" "StatusCheckFailed" "MetadataNoToken"
 	do
 		echo $instanceId $metric
-		aws cloudwatch get-metric-statistics --metric-name $metric --start-time 2020-03-30T08:00:00 --end-time 2020-03-31T07:59:59 --period 60 --namespace AWS/EC2 --statistics Average --dimensions Name=InstanceId,Value=$instanceId > SEOUL$instanceId$metric.json
-		aws s3 cp ./SEOUL$instanceId$metric.json s3://$s3Dir/
-		rm ./SEOUL$instanceId$metric.json
+		aws cloudwatch get-metric-statistics --metric-name $metric --start-time 2020-03-31T02:30:00 --end-time 2020-04-01T02:29:59 --period 60 --namespace AWS/EC2 --statistics Average --dimensions Name=InstanceId,Value=$instanceId --region ap-northeast-1 > TOKYO$instanceId$metric.json
+		aws s3 cp ./TOKYO$instanceId$metric.json s3://$s3Dir/
+		rm ./TOKYO$instanceId$metric.json
 	done
 done
