@@ -27,6 +27,9 @@ while idx >= 0:
 
     idx -= 1
 
-true_val = memo[(0, True)] if (0, True) in memo else 0
-false_val = memo[(0, False)] if (0, False) in memo else 0
-print(max(true_val, false_val))
+result = []
+for i in range(2):
+	for j in [True, False]:
+		if (i, j) in memo: result.append(memo[i,j])
+
+print(max(result))
