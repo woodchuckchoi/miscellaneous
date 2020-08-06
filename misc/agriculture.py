@@ -1,13 +1,16 @@
 def rectSum(rx, ry, x, y, arr):
 	ret = 0
 
-	xStep = 1 if x <= rx else -1
-	yStep = 1 if y <= ry else -1
+	yRange = range(y, ry, -1)
+	if y <= ry: yRange = range(y, ry+1, 1)
 
-	for i in range(y, ry, yStep):
-		for j in range(x, rx, xStep):
+	xRange = range(x, rx, -1)
+	if x <= rx: xRange = range(x, rx+1, 1)
+
+	for i in yRange:
+		for j in xRange:
 			ret += arr[i][j]
-
+	
 	return ret	
 
 def main():
